@@ -43,6 +43,10 @@ export default {
   --pry-font: "Courier Prime", monospace;
   --sec-font: "Limelight", cursive;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 #app {
   font-family: var(--pry-font);
   color: var(--pry-clr);

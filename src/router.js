@@ -8,18 +8,15 @@ import NotFound from './pages/NotFound';
 const routes = [
   {
     path: '/',
-    // name: 'Home',
     component: Home,
   },
   {
     path: '/game-mode/:theme',
-    // name: 'GameMode',
     component: GameMode,
     props: true,
   },
   {
-    path: '/game-play/:id',
-    // name: 'GamePlay',
+    path: '/game-play/:theme/:id',
     component: GamePlay,
     props: true,
   },
