@@ -1,7 +1,13 @@
 <template>
   <base-button>Game Mode</base-button>
   <the-board @cell-click="cellClick"></the-board>
-  <result-message class="result-message" v-show="gameEnd"></result-message>
+  <result-message
+    class="result-message"
+    v-show="gameEnd"
+    :gameEndMessage="gameEndMessage"
+    @restart-game="restartGame"
+    @end-game="endGame"
+  ></result-message>
   <quit-message class="quit-message" v-show="quitRequest"></quit-message>
 </template>
 
@@ -18,8 +24,11 @@ export default {
   props: ["theme", "id"],
   data() {
     return {
+      winResult: false,
+      drawResult: false,
       gameEnd: false,
       quitRequest: false,
+      gameEndMessage: "",
       WINNING_COMBINATIONS: [
         [0, 1, 2],
         [3, 4, 5],
@@ -30,7 +39,6 @@ export default {
         [0, 4, 8],
         [2, 4, 6],
       ],
-      result: null,
     };
   },
   methods: {
@@ -42,11 +50,43 @@ export default {
         });
       });
       if (winStatus) {
+        this.winResult = true;
         this.gameEnd = true;
+        if (currentClass === "nought") {
+          this.gameEndMessage = "O wins this round!";
+        } else {
+          this.gameEndMessage = "X wins this round!";
+        }
+      }
+    },
+    checkDraw() {
+      let cellElements = document.querySelectorAll(".board-cell");
+      let drawStatus = [...cellElements].every((cell) => {
+        return (
+          cell.classList.contains("nought") || cell.classList.contains("cross")
+        );
+      });
+      if (drawStatus) {
+        this.drawResult = true;
+        this.gameEnd = true;
+        this.gameEndMessage = "Draw!";
       }
     },
     cellClick(setPlayClass) {
+      this.checkDraw();
       this.checkWin(setPlayClass);
+    },
+    restartGame() {
+      this.winResult = false;
+      this.drawResult = false;
+      this.gameEnd = false;
+      this.gameEndMessage = "";
+      let cellElements = document.querySelectorAll(".board-cell");
+      cellElements.forEach((cell) => cell.classList.remove("nought", "cross"));
+      return;
+    },
+    endGame() {
+      this.restartGame();
     },
   },
 };
