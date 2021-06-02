@@ -1,7 +1,9 @@
 <template>
-  <div class="base-board-bg" :style="{ background: gameTheme }">
-    <slot></slot>
-  </div>
+  <base-flex-wrapper justifyContent="center">
+    <div class="base-board-bg" :style="{ background: gameTheme }">
+      <slot></slot>
+    </div>
+  </base-flex-wrapper>
 </template>
 
 <script>
