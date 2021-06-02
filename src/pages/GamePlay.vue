@@ -20,21 +20,33 @@ export default {
     return {
       gameEnd: false,
       quitRequest: false,
+      WINNING_COMBINATIONS: [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ],
+      result: null,
     };
   },
   methods: {
-    cellClick(cell) {
-      if (cell === "one") {
-        console.log("one time");
-      } else if (cell === "two") {
-        console.log("two time");
-      } else if (cell === "three") {
-        console.log("three time");
-      } else if (cell === "four") {
-        console.log("four time");
-      } else {
-        console.log("some other");
+    checkWin(currentClass) {
+      let cellElements = document.querySelectorAll(".board-cell");
+      let winStatus = this.WINNING_COMBINATIONS.some((combination) => {
+        return combination.every((index) => {
+          return cellElements[index].classList.contains(currentClass);
+        });
+      });
+      if (winStatus) {
+        this.gameEnd = true;
       }
+    },
+    cellClick(setPlayClass) {
+      this.checkWin(setPlayClass);
     },
   },
 };

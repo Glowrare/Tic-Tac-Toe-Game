@@ -10,55 +10,55 @@
         class="cell board-cell"
         :class="[boardCell.one ? playClass.one : '']"
         @click.once="addPlayClass('cellOne')"
-        @click="$emit('cell-click', 'one')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.two ? playClass.two : '']"
         @click.once="addPlayClass('cellTwo')"
-        @click="$emit('cell-click', 'two')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.three ? playClass.three : '']"
         @click.once="addPlayClass('cellThree')"
-        @click="$emit('cell-click', 'three')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.four ? playClass.four : '']"
         @click.once="addPlayClass('cellFour')"
-        @click="$emit('cell-click', 'four')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.five ? playClass.five : '']"
         @click.once="addPlayClass('cellFive')"
-        @click="$emit('cell-click', 'five')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.six ? playClass.six : '']"
         @click.once="addPlayClass('cellSix')"
-        @click="$emit('cell-click', 'six')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.seven ? playClass.seven : '']"
         @click.once="addPlayClass('cellSeven')"
-        @click="$emit('cell-click', 'seven')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.eight ? playClass.eight : '']"
         @click.once="addPlayClass('cellEight')"
-        @click="$emit('cell-click', 'eight')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
         :class="[boardCell.nine ? playClass.nine : '']"
         @click.once="addPlayClass('cellNine')"
-        @click="$emit('cell-click', 'nine')"
+        @click="$emit('cell-click', setPlayClass)"
       ></div>
     </div>
   </base-board-bg>
