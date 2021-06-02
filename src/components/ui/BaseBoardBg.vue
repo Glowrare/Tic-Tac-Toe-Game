@@ -42,7 +42,6 @@ export default {
   border: 1px solid #000000;
   box-shadow: 9px 10px 3px 3px rgba(27, 23, 23, 0.5);
   border-radius: 10px;
-  /* height: 600px; */
   min-height: min(100vw, 500px);
   padding-top: 50px;
 }
