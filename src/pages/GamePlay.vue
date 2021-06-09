@@ -104,16 +104,16 @@ export default {
 
       this.checkDraw();
       this.checkWin(setPlayClass);
-      // if (!this.gameEnd) {
-      //   this.restartStatus = false;
-      //   if (setPlayClass === "nought") {
-      //     this.currentClass = "O's turn";
-      //   } else {
-      //     this.currentClass = "X's turn";
-      //   }
-      // } else {
-      //   this.currentClass = "Game ends!";
-      // }
+      if (!this.gameEnd) {
+        this.restartStatus = false;
+        if (setPlayClass === "nought") {
+          this.currentClass = "X's turn";
+        } else {
+          this.currentClass = "O's turn";
+        }
+      } else {
+        this.currentClass = "Game ends!";
+      }
     },
     restartGame() {
       (this.currentClass = "X's turn"), (this.winResult = false);

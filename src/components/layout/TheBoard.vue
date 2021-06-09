@@ -1,11 +1,6 @@
 <template>
   <base-board-bg>
-    <div
-      class="board"
-      id="board"
-      :class="[crossClass ? 'cross' : 'nought']"
-      @click="isCross"
-    >
+    <div class="board" id="board" :class="[crossClass ? 'cross' : 'nought']">
       <div
         class="cell board-cell"
         :key="cellKeys.one"
@@ -132,9 +127,9 @@ export default {
   computed: {
     setPlayClass() {
       if (this.crossClass) {
-        return "cross";
-      } else {
         return "nought";
+      } else {
+        return "cross";
       }
     },
     getNumber() {
@@ -149,6 +144,7 @@ export default {
       this.number = cell;
       if (cell) {
         if (!this.boardCell[this.getNumber]) {
+          this.isCross();
           this.boardCell[this.getNumber] = true;
           this.playClass[this.getNumber] = this.setPlayClass;
         }
