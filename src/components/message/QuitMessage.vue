@@ -5,16 +5,22 @@
     >
     <template v-slot:otherModalContent>
       <base-flex-wrapper justifyContent="space-evenly">
-        <button class="rect-btn rect-btn-yes">
-          <router-link to="">Yes</router-link>
+        <button class="rect-btn rect-btn-yes" @click="$emit('confirm-quit')">
+          <router-link to="/">Yes</router-link>
         </button>
-        <button class="rect-btn rect-btn-no">
-          <router-link to="">No</router-link>
+        <button class="rect-btn rect-btn-no" @click="$emit('cancel-quit')">
+          No
         </button>
       </base-flex-wrapper>
     </template>
   </base-modal>
 </template>
+
+<script>
+export default {
+  emits: ["confirm-quit", "cancel-quit"],
+};
+</script>
 
 <style scoped>
 .rect-btn {

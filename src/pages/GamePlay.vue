@@ -1,6 +1,13 @@
 <template>
-  <base-button>Game Mode</base-button>
-  <the-board @cell-click="cellClick"></the-board>
+  <base-button>{{ currentClass }}</base-button>
+  <base-flex-wrapper justifyContent="center">
+    <button class="quit-btn" @click="quitGameRequest">Quit</button>
+  </base-flex-wrapper>
+  <the-board
+    @cell-click="cellClick"
+    :restartStatus="restartStatus"
+    :cellKeys="cellKeys"
+  ></the-board>
   <result-message
     class="result-message"
     v-show="gameEnd"
@@ -8,7 +15,12 @@
     @restart-game="restartGame"
     @end-game="endGame"
   ></result-message>
-  <quit-message class="quit-message" v-show="quitRequest"></quit-message>
+  <quit-message
+    class="quit-message"
+    v-show="quitRequest"
+    @cancel-quit="cancelQuit"
+    @confirm-quit="endGame"
+  ></quit-message>
 </template>
 
 <script>
@@ -24,11 +36,13 @@ export default {
   props: ["theme", "id"],
   data() {
     return {
+      currentClass: "X's turn",
       winResult: false,
       drawResult: false,
       gameEnd: false,
       quitRequest: false,
       gameEndMessage: "",
+      restartStatus: false,
       WINNING_COMBINATIONS: [
         [0, 1, 2],
         [3, 4, 5],
@@ -39,6 +53,17 @@ export default {
         [0, 4, 8],
         [2, 4, 6],
       ],
+      cellKeys: {
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+        seven: 7,
+        eight: 8,
+        nine: 9,
+      },
     };
   },
   methods: {
@@ -50,6 +75,7 @@ export default {
         });
       });
       if (winStatus) {
+        // currentClass = !currentClass;
         this.winResult = true;
         this.gameEnd = true;
         if (currentClass === "nought") {
@@ -73,21 +99,84 @@ export default {
       }
     },
     cellClick(setPlayClass) {
+      // console.log(setPlayClass);
+      // this.gameEnd = true;
+
       this.checkDraw();
       this.checkWin(setPlayClass);
+      // if (!this.gameEnd) {
+      //   this.restartStatus = false;
+      //   if (setPlayClass === "nought") {
+      //     this.currentClass = "O's turn";
+      //   } else {
+      //     this.currentClass = "X's turn";
+      //   }
+      // } else {
+      //   this.currentClass = "Game ends!";
+      // }
     },
     restartGame() {
-      this.winResult = false;
+      (this.currentClass = "X's turn"), (this.winResult = false);
       this.drawResult = false;
       this.gameEnd = false;
+      this.restartStatus = true;
+      let cellKeysAccess = [
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+      ];
+      Object.entries(this.cellKeys).forEach((entry, index) => {
+        let newVal = entry[1];
+        newVal++;
+        this.cellKeys[cellKeysAccess[index]] = newVal;
+      });
+      console.log(this.cellKeys);
       this.gameEndMessage = "";
+      document.querySelector("#board").classList.remove("nought");
+      document.querySelector("#board").classList.add("cross");
       let cellElements = document.querySelectorAll(".board-cell");
-      cellElements.forEach((cell) => cell.classList.remove("nought", "cross"));
-      return;
+      cellElements.forEach((cell) => {
+        cell.classList.remove("nought", "cross");
+      });
+      setTimeout(() => {
+        this.restartStatus = false;
+      }, 1000);
     },
     endGame() {
       this.restartGame();
     },
+    quitGameRequest() {
+      this.quitRequest = true;
+    },
+    cancelQuit() {
+      this.quitRequest = false;
+    },
   },
 };
 </script>
+
+<style scoped>
+.quit-btn {
+  text-transform: uppercase;
+  background: #ffffff;
+  border: 2px solid var(--pry-clr);
+  color: var(--pry-clr);
+  font-weight: 700;
+  height: 40px;
+  width: 110px;
+  margin-top: -20px;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+.quit-btn:hover {
+  background: var(--pry-clr);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+</style>
