@@ -1,33 +1,20 @@
-# tic-tac-toe
-
-## Project setup
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 # Tic-Tac-Toe-Game
 
-A fun multiplayer Tic Tac Toe Game made with Vue.js
+I made this fun multiplayer Tic Tac Toe Game with Vue.js
+
+[Play Game here](https://funtictactoe.netlify.app/)
+
+### Choose from six different beautiful board themes
+![alt text](https://i.postimg.cc/SxGvhFXm/pickboard.png "")
+
+### Choose a game play mode.
+
+```
+Player versus computer feature is not available yet
+```
+
+![alt text](https://i.postimg.cc/d0tSQHdr/gamemode.png "")
+
+
+### Have fun! 😉
+![alt text](https://i.postimg.cc/VNGZJqBT/tictactoe.gif "")
