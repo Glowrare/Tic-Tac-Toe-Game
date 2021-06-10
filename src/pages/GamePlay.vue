@@ -19,7 +19,6 @@
     class="quit-message"
     v-show="quitRequest"
     @cancel-quit="cancelQuit"
-    @confirm-quit="endGame"
   ></quit-message>
 </template>
 

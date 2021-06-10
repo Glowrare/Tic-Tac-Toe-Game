@@ -5,7 +5,7 @@
     >
     <template v-slot:otherModalContent>
       <base-flex-wrapper justifyContent="space-evenly">
-        <button class="rect-btn rect-btn-yes" @click="$emit('confirm-quit')">
+        <button class="rect-btn rect-btn-yes">
           <router-link to="/">Yes</router-link>
         </button>
         <button class="rect-btn rect-btn-no" @click="$emit('cancel-quit')">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  emits: ["confirm-quit", "cancel-quit"],
+  emits: ["cancel-quit"],
 };
 </script>
 
