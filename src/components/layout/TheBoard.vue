@@ -3,63 +3,54 @@
     <div class="board" id="board" :class="[crossClass ? 'cross' : 'nought']">
       <div
         class="cell board-cell"
-        :key="cellKeys.one"
         :class="[boardCell.one ? playClass.one : '']"
         @click.once="addPlayClass('cellOne')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.two"
         :class="[boardCell.two ? playClass.two : '']"
         @click.once="addPlayClass('cellTwo')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.three"
         :class="[boardCell.three ? playClass.three : '']"
         @click.once="addPlayClass('cellThree')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.four"
         :class="[boardCell.four ? playClass.four : '']"
         @click.once="addPlayClass('cellFour')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.five"
         :class="[boardCell.five ? playClass.five : '']"
         @click.once="addPlayClass('cellFive')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.six"
         :class="[boardCell.six ? playClass.six : '']"
         @click.once="addPlayClass('cellSix')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.seven"
         :class="[boardCell.seven ? playClass.seven : '']"
         @click.once="addPlayClass('cellSeven')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.eight"
         :class="[boardCell.eight ? playClass.eight : '']"
         @click.once="addPlayClass('cellEight')"
         @click="$emit('cell-click', setPlayClass)"
       ></div>
       <div
         class="cell board-cell"
-        :key="cellKeys.nine"
         :class="[boardCell.nine ? playClass.nine : '']"
         @click.once="addPlayClass('cellNine')"
         @click="$emit('cell-click', setPlayClass)"
@@ -72,10 +63,6 @@
 export default {
   emits: ["cell-click"],
   props: {
-    cellKeys: {
-      type: Object,
-      required: true,
-    },
     restartStatus: {
       type: Boolean,
       required: true,
@@ -112,6 +99,7 @@ export default {
   watch: {
     restartStatus() {
       if (this.restartStatus) {
+        console.log("1 =>" + this.restartStatus);
         this.boardCell = Object.keys(this.boardCell).reduce((cell, key) => {
           cell[key] = "false";
           return cell;
@@ -120,7 +108,6 @@ export default {
           cell[key] = "";
           return cell;
         }, {});
-        console.log(this.boardCell);
       }
     },
   },

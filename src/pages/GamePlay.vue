@@ -4,9 +4,9 @@
     <button class="quit-btn" @click="quitGameRequest">Quit</button>
   </base-flex-wrapper>
   <the-board
+    :key="componentKey"
     @cell-click="cellClick"
     :restartStatus="restartStatus"
-    :cellKeys="cellKeys"
   ></the-board>
   <result-message
     class="result-message"
@@ -36,6 +36,7 @@ export default {
   props: ["theme", "id"],
   data() {
     return {
+      componentKey: 0,
       currentClass: "X's turn",
       winResult: false,
       drawResult: false,
@@ -53,20 +54,12 @@ export default {
         [0, 4, 8],
         [2, 4, 6],
       ],
-      cellKeys: {
-        one: 1,
-        two: 2,
-        three: 3,
-        four: 4,
-        five: 5,
-        six: 6,
-        seven: 7,
-        eight: 8,
-        nine: 9,
-      },
     };
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     checkWin(currentClass) {
       let cellElements = document.querySelectorAll(".board-cell");
       let winStatus = this.WINNING_COMBINATIONS.some((combination) => {
@@ -75,7 +68,6 @@ export default {
         });
       });
       if (winStatus) {
-        // currentClass = !currentClass;
         this.winResult = true;
         this.gameEnd = true;
         if (currentClass === "nought") {
@@ -99,9 +91,6 @@ export default {
       }
     },
     cellClick(setPlayClass) {
-      // console.log(setPlayClass);
-      // this.gameEnd = true;
-
       this.checkDraw();
       this.checkWin(setPlayClass);
       if (!this.gameEnd) {
@@ -120,23 +109,6 @@ export default {
       this.drawResult = false;
       this.gameEnd = false;
       this.restartStatus = true;
-      let cellKeysAccess = [
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine",
-      ];
-      Object.entries(this.cellKeys).forEach((entry, index) => {
-        let newVal = entry[1];
-        newVal++;
-        this.cellKeys[cellKeysAccess[index]] = newVal;
-      });
-      console.log(this.cellKeys);
       this.gameEndMessage = "";
       document.querySelector("#board").classList.remove("nought");
       document.querySelector("#board").classList.add("cross");
@@ -144,9 +116,7 @@ export default {
       cellElements.forEach((cell) => {
         cell.classList.remove("nought", "cross");
       });
-      setTimeout(() => {
-        this.restartStatus = false;
-      }, 1000);
+      this.forceRerender();
     },
     endGame() {
       this.restartGame();
